@@ -2,69 +2,74 @@
 {
      internal class Program
      {
+          static int numero;
+
+          static string GerarMenu()
+          {
+               Console.Clear();
+               Console.WriteLine("===============================");
+               Console.WriteLine("\nDiamantes em X\n");
+               Console.WriteLine("===============================");
+
+               Console.Write("\nDigite S para sair, ou qualquer outro botão para continuar:\n> ");
+               string opcao;
+               opcao = Console.ReadLine().ToUpper();
+               return opcao;
+          }
+
+          static void PegarNumero(string mensagem)
+          {
+               Console.Clear();
+               Console.Write(mensagem);
+               numero = Convert.ToInt32(Console.ReadLine());
+               Console.ResetColor();
+
+               while (numero % 2 == 0)
+               {
+                    Console.Clear();
+                    Console.Write("Digite um número válido!\n\n");
+                    Console.Write(mensagem);
+                    numero = Convert.ToInt32(Console.ReadLine());
+               }
+          }
+
+          static void ConstruirDiamante()
+          {
+               Console.ForegroundColor = ConsoleColor.Blue;
+               for (int i = 0; i < numero; i++)
+               {
+                    int espaco = Math.Abs(numero / 2 - i);
+                    int x = numero - 2 * espaco;
+
+                    for (int p = 0; p < espaco; p++)
+                    {
+                         Console.Write(" ");
+                    }
+                    for (int p = 0; p < x; p++)
+                    {
+                         Console.Write("X");
+                    }
+                    Console.WriteLine();
+               }
+               Console.ReadLine();
+               Console.ResetColor();
+          }
+
           static void Main(string[] args)
           {
                do
                {
-                    #region Menu e opção de sair;
+                    string opcao = GerarMenu();
 
-                    int n;
-                    Console.Clear();
-                    Console.WriteLine("===============================");
-                    Console.WriteLine("\nDiamantes em X\n");
-                    Console.WriteLine("===============================");
-
-                    Console.Write("\nDigite S para sair, ou qualquer outro botão para continuar:\n> ");
-
-                    string op;
-                    op = Console.ReadLine();
-
-                    if (op == "s" || op == "S")
+                    if (opcao == "S")
                     {
                          Console.WriteLine("\nSaindo...");
                          break;
                     }
 
-                    #endregion 
-
-                    #region Verificação de números ímpares;
-
-                    Console.Clear();
-                    Console.Write("Digite um número ímpar:\n> ");
-                    n = Convert.ToInt32(Console.ReadLine());
-
-                    while (n % 2 == 0)
-                    {
-                         Console.Clear();
-                         Console.Write("Digite um número válido!\n");
-                         Console.Write("\nDigite um número ímpar:\n> ");
-                         n = Convert.ToInt32(Console.ReadLine());
-                    }
-
-                    #endregion
-
-                    #region Impressão de espaços e x paralelamente;
-
+                    PegarNumero("Entre com um valor ímpar:\n> ");
                     Console.Write("\n\n");
-                    for (int i = 0; i < n; i++)
-                    {
-                         int es = Math.Abs(n / 2 - i);
-                         int x = n - 2 * es;
-
-                         for (int p = 0; p < es; p++)
-                         {
-                              Console.Write(" ");
-                         }
-                         for (int p = 0; p < x; p++)
-                         {
-                              Console.Write("X");
-                         }
-
-                         Console.WriteLine();
-                    }
-                    Console.ReadLine();
-
-                    #endregion
+                    ConstruirDiamante();
 
                } while (true);
           }
