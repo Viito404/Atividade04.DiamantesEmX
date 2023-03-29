@@ -2,7 +2,34 @@
 {
      internal class Program
      {
+          #region Variável Global;
+
           static int numero;
+
+          #endregion
+
+          static void Main(string[] args)
+          {
+               do
+               {
+                    string opcao = GerarMenu();
+
+                    if (opcao == "S")
+                    {
+                         Console.ForegroundColor = ConsoleColor.Red;
+                         Console.WriteLine("\nSaindo...");
+                         Console.ResetColor();
+                         break;
+                    }
+
+                    PegarNumero("Entre com um valor ímpar:\n> ");
+                    Console.Write("\n\n");
+                    ConstruirDiamante();
+
+               } while (true);
+          }
+
+          #region Funções;
 
           static string GerarMenu()
           {
@@ -55,23 +82,7 @@
                Console.ResetColor();
           }
 
-          static void Main(string[] args)
-          {
-               do
-               {
-                    string opcao = GerarMenu();
+          #endregion
 
-                    if (opcao == "S")
-                    {
-                         Console.WriteLine("\nSaindo...");
-                         break;
-                    }
-
-                    PegarNumero("Entre com um valor ímpar:\n> ");
-                    Console.Write("\n\n");
-                    ConstruirDiamante();
-
-               } while (true);
-          }
      }
 }
